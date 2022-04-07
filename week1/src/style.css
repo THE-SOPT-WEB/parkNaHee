@@ -20,6 +20,7 @@
 .sidebar {
   border-radius: 0.5rem;
   width: 10%;
+  max-width: 20rem;
   height: 8rem;
   background-color: rgb(255, 173, 173);
   padding: 0.5rem 0.5rem;
@@ -29,7 +30,7 @@
   justify-content: center;
 }
 .sidebar__title {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 }
 .sidebar__options {
   margin-top: 0.25rem;
@@ -87,6 +88,8 @@
 }
 .menu__box__img {
   width: 25%;
+  max-width: 13rem;
+  min-width: 8rem;
 }
 .menu__box__text {
   width: 60%;
@@ -94,7 +97,7 @@
   overflow: hidden;
 }
 .menu__box__text-title {
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   display: block;
   margin-bottom: 0.5rem;
 }
@@ -120,7 +123,7 @@
   -webkit-box-orient: vertical;
 }
 .cart {
-  width: 15%;
+  width: 18rem;
   position: sticky;
   top: 1rem;
   border-radius: 0.5rem;
@@ -136,6 +139,7 @@
 .cart__title {
   font-size: 1.5rem;
   height: 40%;
+  padding-top: 1rem;
   border-bottom: 3px solid white;
 }
 .cart__price {
@@ -171,4 +175,53 @@
   color: white;
   background-color: rgb(255, 124, 124);
   cursor: pointer;
+}
+
+@media (max-width: 1200px) {
+  .sidebar {
+    width: 7rem;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    top: 0rem;
+    left: 1rem;
+  }
+  .sidebar__title {
+    display: none;
+  }
+  .sidebar__options {
+    margin-top: 0.25rem;
+  }
+  .sidebar__options-li {
+    margin-top: 0.5rem;
+    height: 1.5rem;
+  }
+  .sidebar__options-li > button {
+    border-radius: 0.5rem;
+    background-color: white;
+    color: black;
+    width: 100%;
+    height: 100%;
+  }
+  .sidebar__options-li > button :active {
+    background-color: rgb(255, 124, 124);
+    color: white;
+  }
+  .sidebar__options-li > button.active {
+    background-color: rgb(255, 124, 124);
+    color: white;
+  }
+
+  .sidebar__options-li > button:hover {
+    background-color: rgb(255, 124, 124);
+    color: white;
+    cursor: pointer;
+  }
+}
+@media (max-width: 768px) {
+  .menu__box {
+    width: 100%;
+  }
 }
