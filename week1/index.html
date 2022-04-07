@@ -2,12 +2,116 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <meta name="description" content="햄식이를 위한 햄버거 메뉴 페이지입니다." />
+    <meta property="og:title" content="햄식이를 도와줘" />
+    <meta
+      property="og:description"
+      content="햄식이를 위한 햄버거 메뉴 페이지입니다. 궁금하시면 클릭 ㄱㄱ"
+    />
+    <meta property="og:image" content="https://img.hankyung.com/photo/202112/01.28426992.1.jpg" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="stylesheet" href="/src/reset.css" />
+    <link rel="stylesheet" href="/src/style.css" />
+    <title>햄식이를 도와줘</title>
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
+    <header class="header"><h1>🍔 햄식이를 도와줘 🍔</h1></header>
+    <main class="main">
+      <aside class="sidebar">
+        <h2 class="sidebar__title">다른 거 먹자</h2>
+        <ul class="sidebar__options">
+          <li class="sidebar__options-li"><button>맥도날드</button></li>
+          <li class="sidebar__options-li"><button>버거킹</button></li>
+        </ul>
+      </aside>
+      <section class="menu">
+        <h2 class="menu__title">햄버거 메뉴 리스트</h2>
+        <article class="menu__box">
+          <img
+            src="https://w.namu.la/s/126ed0de470ffd19954dde2dcdf4684286c506b774a2c1cf713c04309cf94ce26946aa03ec30a4a8a93e8e645c7bf361347807b0654a312c6e58c34e8f6bbf9825abf24df3fdd61d1b9a12986b95f3bd001989fed996debfbe1dcf12a9bb7226"
+            alt="햄버거"
+            class="menu__box__img"
+          />
+          <div class="menu__box__text">
+            <strong class="menu__box__text-title">빅맥</strong>
+            <p class="menu__box__text-price">5500원</p>
+            <p class="menu__box__text-description">일단 내 최애는 아님</p>
+          </div>
+        </article>
+        <article class="menu__box">
+          <img
+            src="https://w.namu.la/s/126ed0de470ffd19954dde2dcdf4684286c506b774a2c1cf713c04309cf94ce26946aa03ec30a4a8a93e8e645c7bf361347807b0654a312c6e58c34e8f6bbf9825abf24df3fdd61d1b9a12986b95f3bd001989fed996debfbe1dcf12a9bb7226"
+            alt="햄버거"
+            class="menu__box__img"
+          />
+          <div class="menu__box__text">
+            <strong class="menu__box__text-title">슈슈버거</strong>
+            <p class="menu__box__text-price">5500원</p>
+            <p class="menu__box__text-description">일단 내 최애는 아님</p>
+          </div>
+        </article>
+        <article class="menu__box">
+          <img
+            src="https://w.namu.la/s/126ed0de470ffd19954dde2dcdf4684286c506b774a2c1cf713c04309cf94ce26946aa03ec30a4a8a93e8e645c7bf361347807b0654a312c6e58c34e8f6bbf9825abf24df3fdd61d1b9a12986b95f3bd001989fed996debfbe1dcf12a9bb7226"
+            alt="햄버거"
+            class="menu__box__img"
+          />
+          <div class="menu__box__text">
+            <strong class="menu__box__text-title">베토디</strong>
+            <p class="menu__box__text-price">5500원</p>
+            <p class="menu__box__text-description">일단 내 최애는 아님</p>
+          </div>
+        </article>
+        <article class="menu__box">
+          <img
+            src="https://w.namu.la/s/126ed0de470ffd19954dde2dcdf4684286c506b774a2c1cf713c04309cf94ce26946aa03ec30a4a8a93e8e645c7bf361347807b0654a312c6e58c34e8f6bbf9825abf24df3fdd61d1b9a12986b95f3bd001989fed996debfbe1dcf12a9bb7226"
+            alt="햄버거"
+            class="menu__box__img"
+          />
+          <div class="menu__box__text">
+            <strong class="menu__box__text-title">상하이</strong>
+            <p class="menu__box__text-price">5500원</p>
+            <p class="menu__box__text-description">내!!! 최애!!! 얼마나 맛있게요?</p>
+          </div>
+        </article>
+        <article class="menu__box">
+          <img
+            src="https://w.namu.la/s/126ed0de470ffd19954dde2dcdf4684286c506b774a2c1cf713c04309cf94ce26946aa03ec30a4a8a93e8e645c7bf361347807b0654a312c6e58c34e8f6bbf9825abf24df3fdd61d1b9a12986b95f3bd001989fed996debfbe1dcf12a9bb7226"
+            alt="햄버거"
+            class="menu__box__img"
+          />
+          <div class="menu__box__text">
+            <strong class="menu__box__text-title">1955</strong>
+            <p class="menu__box__text-price">5500원</p>
+            <p class="menu__box__text-description">이건 몰까...</p>
+          </div>
+        </article>
+        <article class="menu__box">
+          <img
+            src="https://w.namu.la/s/126ed0de470ffd19954dde2dcdf4684286c506b774a2c1cf713c04309cf94ce26946aa03ec30a4a8a93e8e645c7bf361347807b0654a312c6e58c34e8f6bbf9825abf24df3fdd61d1b9a12986b95f3bd001989fed996debfbe1dcf12a9bb7226"
+            alt="햄버거"
+            class="menu__box__img"
+          />
+          <div class="menu__box__text">
+            <strong class="menu__box__text-title">불고기</strong>
+            <p class="menu__box__text-price">5500원</p>
+            <p class="menu__box__text-description">스탠다드긴 해~</p>
+          </div>
+        </article>
+      </section>
+      <section class="cart">
+        <h2 class="cart__title">장바구니</h2>
+        <div class="cart__price">
+          <p class="cart__price-title">누적 금액</p>
+          <p class="cart__price-content">0원</p>
+        </div>
+        <div class="cart__footer">
+          <button class="cart__footer-button">주문하기</button>
+          <button class="cart__footer-button">취소하기</button>
+        </div>
+      </section>
+    </main>
   </body>
 </html>
