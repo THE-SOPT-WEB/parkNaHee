@@ -85,6 +85,7 @@ video {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+  font-family: JejuMyeongjo;
 } /* HTML5 display-role reset for older browsers */
 article,
 aside,
@@ -127,4 +128,12 @@ button {
   appearance: none;
   border: 0;
   outline: 0;
+  background: transparent;
+  font-family: JejuMyeongjo;
+}
+
+@font-face {
+  font-family: 'JejuMyeongjo';
+  font-weight: 400;
+  src: url('../public/fonts/JejuMyeongjo.ttf') format('truetype');
 }
