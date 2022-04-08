@@ -32,30 +32,30 @@
 .sidebar__title {
   font-size: 1.2rem;
 }
-.sidebar__options {
+.sidebar__options-wrapper {
   margin-top: 0.25rem;
 }
-.sidebar__options-li {
+.sidebar__options {
   margin-top: 0.5rem;
   height: 1.5rem;
 }
-.sidebar__options-li > button {
+.sidebar__options > button {
   background-color: white;
   border-radius: 0.5rem;
   color: black;
   width: 100%;
   height: 100%;
 }
-.sidebar__options-li > button :active {
+.sidebar__options > button :active {
   background-color: rgb(255, 124, 124);
   color: white;
 }
-.sidebar__options-li > button.active {
+.sidebar__options > button.active {
   background-color: rgb(255, 124, 124);
   color: white;
 }
 
-.sidebar__options-li > button:hover {
+.sidebar__options > button:hover {
   background-color: rgb(255, 124, 124);
   color: white;
   cursor: pointer;
@@ -91,22 +91,22 @@
   max-width: 13rem;
   min-width: 8rem;
 }
-.menu__box__text {
+.menu__box__text-wrapper {
   width: 60%;
   max-height: 70%;
   overflow: hidden;
 }
-.menu__box__text-title {
+.menu__box__title {
   font-size: 1.5rem;
   display: block;
   margin-bottom: 0.5rem;
 }
-.menu__box__text-price {
+.menu__box__price {
   font-size: 1.25rem;
   display: block;
   margin-bottom: 0.5rem;
 }
-.menu__box__text-description {
+.menu__box__description {
   font-size: 1rem;
   display: block;
   width: 100%;
@@ -153,7 +153,7 @@
 .cart__price p {
   display: block;
 }
-.cart__price-title {
+.cart__price--title {
   font-size: 1.5rem;
   margin-bottom: 0.75rem;
 }
@@ -163,7 +163,7 @@
   justify-content: center;
   align-items: center;
 }
-.cart__footer-button {
+.cart__footer--button {
   width: 5rem;
   height: 2rem;
   border-radius: 0.5rem;
@@ -171,7 +171,7 @@
   background-color: rgb(255, 255, 255);
   margin-right: 0.5rem;
 }
-.cart__footer-button:hover {
+.cart__footer--button:hover {
   color: white;
   background-color: rgb(255, 124, 124);
   cursor: pointer;
