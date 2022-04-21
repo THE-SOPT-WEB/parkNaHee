@@ -11,8 +11,9 @@ export default class HeaderController extends Controller {
   }
 
   init = () => {
-    // console.log('>>_headerView', this._view);
-    this._view.template(HEADER_TEXT);
-    this._view.render(HEADER_TEXT);
+    const state = this._model.get();
+    console.log('>>header state', state);
+    this._view.template(state);
+    this._view.render(state);
   };
 }

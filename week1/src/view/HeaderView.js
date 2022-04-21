@@ -8,7 +8,6 @@ export default class HeaderView extends View {
 
   // override template()
   template = (state) => {
-    console.log('>>state', state);
     return `
             <h1 class="header__title">${state?.text}</h1>
 		`;

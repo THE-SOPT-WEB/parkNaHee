@@ -48,7 +48,7 @@
   width: 100%;
   height: 100%;
 }
-.sidebar__options > button :active {
+.sidebar__options > button:focus {
   background-color: rgb(255, 124, 124);
   color: white;
 }
