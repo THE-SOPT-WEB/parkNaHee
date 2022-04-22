@@ -1,17 +1,28 @@
 /* MenuView.js */
-import View from './View';
+import View from './index';
 
-export default class AppView extends View {
+export default class MenuView extends View {
   constructor(target) {
     super(target);
   }
 
   // override template()
   template = (state) => {
-    const { text } = state;
+    const htmlArr = state.map(
+      (item) => `
+    <li class="menu__box">
+      <img src=${item.src} alt=${item.alt} class="menu__box__img" />
+      <div class="menu__box__text-wrapper">
+        <strong class="menu__box__title">${item.title}</strong>
+        <p class="menu__box__price">${item.price}원</p>
+        <p class="menu__box__description">${item.description}</p>
+      </div>
+    </li>
+    `,
+    );
+    const returnTemplate = htmlArr.join('');
     return `
-			<div class="header">${text}</div>
-			<div class="container">this is container</div>
+  ${returnTemplate}
 		`;
   };
 }

@@ -1,10 +1,10 @@
 import Header from './controllers/HeaderController';
-import Sidebar from './controllers/SidebarController';
+import Main from './controllers/MainController';
 
+export let store;
 const initApp = () => {
   const $header = new Header('.header');
-  const $sidebar = new Sidebar('.sidebar');
-  // console.log('>>>>$header', $header);
+  const $main = new Main('.main');
 };
 
 window.addEventListener('DOMContentLoaded', initApp);
