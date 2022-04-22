@@ -23,11 +23,9 @@ export default class MainView extends View {
     </section>
     <section class="cart">
     <h2 class="cart__title">장바구니</h2>
-    <div class="cart__item">
-    </div>
+    <ul class="cart__item-group">
+    </ul>
     <div class="cart__price">
-      <p class="cart__price--title">누적 금액</p>
-      <p class="cart__price--content"></p>
     </div>
     <div class="cart__footer">
       <button class="cart__footer--order cart__footer--button">주문하기</button>

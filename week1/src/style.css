@@ -162,6 +162,14 @@
   font-size: 1.5rem;
   margin-bottom: 0.75rem;
 }
+.cart__item {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.cart__item input {
+  width: 20%;
+}
 .cart__footer {
   height: 30%;
   display: flex;

@@ -9,8 +9,8 @@ export default class MenuView extends View {
   // override template()
   template = (state) => {
     const htmlArr = state.map(
-      (item) => `
-    <li class="menu__box">
+      (item, idx) => `
+    <li class="menu__box" id="${idx}">
       <img src=${item.src} alt=${item.alt} class="menu__box__img" />
       <div class="menu__box__text-wrapper">
         <strong class="menu__box__title">${item.title}</strong>
