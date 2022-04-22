@@ -34,8 +34,8 @@ const quizList = [
 ];
 
 const attachEvent = (renderManager) => {
-  answerList.addEventListener('click', renderManager._gradeAnswer);
-  retryBtn.addEventListener('click', renderManager._init);
+  answerList.addEventListener('click', renderManager.checkAnswer);
+  retryBtn.addEventListener('click', renderManager.init);
 };
 const init = (quizList) => {
   const renderManager = new RenderManager(quizList);
