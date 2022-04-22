@@ -10,11 +10,11 @@ export default class CartView extends View {
   template = (state) => {
     const htmlArr = Object.values(state).map(
       (item, idx) => `
-    <li class="cart__item" id="${idx}">
+    <li class="cart__item" id="${item.idx}">
       <p>${item.title}</p>
       <input value=${item.count} readonly></input>
       <p>${item.price}</p>
-      <button>X</button>
+      <button class="cart__item--delete">X</button>
     </li>
     `,
     );

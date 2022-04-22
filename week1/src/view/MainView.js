@@ -31,6 +31,8 @@ export default class MainView extends View {
       <button class="cart__footer--order cart__footer--button">주문하기</button>
       <button class="cart__footer--cancel cart__footer--button">취소하기</button>
     </div>
+    <div class="modal hide">
+    </div>
     </section>
 		`;
   };
