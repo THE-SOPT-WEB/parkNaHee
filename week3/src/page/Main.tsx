@@ -8,7 +8,10 @@ import { useNavigate } from 'react-router-dom';
 import TournamentProgress from '../components/main/TournamentProgress';
 
 type CurrentRoundType = 'FIRSTROUND' | 'SECONDROUND' | 'FINALROUND';
-function Main() {
+interface MainProps {
+  setFinalWinner?: React.Dispatch<React.SetStateAction<ImageType>>;
+}
+function Main({ setFinalWinner }: MainProps) {
   const winner = useRef(new Set<ImageType>([]));
   const [currentRound, setCurrentRound] = useState<CurrentRoundType>('FIRSTROUND');
   const [currentBattlers, setCurrentBattlers] = useState(Object.values(courses));
@@ -24,13 +27,15 @@ function Main() {
         setCurrentRound('FINALROUND');
         return 'FINALROUND';
       default:
+        setFinalWinner(Array.from(winner.current)[0]);
         navigate('/complete');
     }
   };
 
   const onClickHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (e.target instanceof Element) {
-      winner.current.add(courses[e.target.id]);
+      console.log(courses[e.currentTarget.id]);
+      winner.current.add(courses[e.currentTarget.id]);
       setCurrentStep((prev) => prev + 1);
 
       if (winner.current.size * 2 === ROUND[currentRound]) {

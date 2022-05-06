@@ -7,7 +7,6 @@ interface TitleProps {
 }
 
 function Title({ children }: TitleProps) {
-  console.log('>>>children', children);
   return <Styled.Title>{children}</Styled.Title>;
 }
 

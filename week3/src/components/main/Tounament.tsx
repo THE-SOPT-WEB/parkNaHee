@@ -11,18 +11,13 @@ interface TournamentProps {
 function Tounament({ currentBattler, currentStep, onClick }: TournamentProps) {
   return (
     <>
-      <Styled.TounamentWrapper onClick={onClick}>
-        <Styled.TounamentFigure>
-          <img
-            id={currentBattler[currentStep].id}
-            src={currentBattler[currentStep].image}
-            alt={currentBattler[currentStep].alt}
-          />
+      <Styled.TounamentWrapper>
+        <Styled.TounamentFigure onClick={onClick} id={currentBattler[currentStep].id}>
+          <img src={currentBattler[currentStep].image} alt={currentBattler[currentStep].alt} />
           <figcaption>{currentBattler[currentStep].alt}</figcaption>
         </Styled.TounamentFigure>
-        <Styled.TounamentFigure>
+        <Styled.TounamentFigure onClick={onClick} id={currentBattler[currentStep].id}>
           <img
-            id={currentBattler[currentStep + 1].id}
             src={currentBattler[currentStep + 1].image}
             alt={currentBattler[currentStep + 1].alt}
           />
@@ -52,15 +47,19 @@ const Styled = {
       width: 100%;
       height: 100%;
     }
+    & figcaption {
+      height: fit-content;
+    }
   `,
   TounamentVersus: styled.div`
     position: absolute;
     font-size: 7rem;
     font-weight: 500;
-    color: #ffec42ea;
+    color: #ff4242ea;
     text-shadow: 2px 2px 7px #ffffff;
-    height: 100%;
-    left: 44%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     ${flexRowCenter};
   `,
 };
