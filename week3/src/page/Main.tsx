@@ -1,7 +1,58 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import courses from '../models/gameData';
+import Tounament from '../components/main/Tounament';
+import Title from '../components/common/Title';
+import { ROUND } from '../constants';
+import { ImageType } from '../types';
+import { useNavigate } from 'react-router-dom';
+import TournamentProgress from '../components/main/TournamentProgress';
 
+type CurrentRoundType = 'FIRSTROUND' | 'SECONDROUND' | 'FINALROUND';
 function Main() {
-  return <div>Main</div>;
+  const winner = useRef(new Set<ImageType>([]));
+  const [currentRound, setCurrentRound] = useState<CurrentRoundType>('FIRSTROUND');
+  const [currentBattlers, setCurrentBattlers] = useState(Object.values(courses));
+  const [currentStep, setCurrentStep] = useState(0);
+  const navigate = useNavigate();
+
+  const getNextRound = (currentRound: CurrentRoundType) => {
+    switch (currentRound) {
+      case 'FIRSTROUND':
+        setCurrentRound('SECONDROUND');
+        return 'SECONDROUND';
+      case 'SECONDROUND':
+        setCurrentRound('FINALROUND');
+        return 'FINALROUND';
+      default:
+        navigate('/complete');
+    }
+  };
+
+  const onClickHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    if (e.target instanceof Element) {
+      winner.current.add(courses[e.target.id]);
+      setCurrentStep((prev) => prev + 1);
+
+      if (winner.current.size * 2 === ROUND[currentRound]) {
+        getNextRound(currentRound);
+        setCurrentBattlers(Array.from(winner.current));
+        winner.current = new Set([]);
+        setCurrentStep(0);
+      }
+    }
+  };
+
+  return (
+    <>
+      <Title>킹받는 과목 월드컵</Title>
+      <TournamentProgress currentRound={currentRound} currentStep={currentStep} />
+      <Tounament
+        onClick={onClickHandler}
+        currentBattler={currentBattlers}
+        currentStep={currentStep * 2}
+      />
+    </>
+  );
 }
 
 export default Main;

@@ -28,5 +28,6 @@ const Styled = {
   `,
   Image: styled.img`
     margin-bottom: 5rem;
+    width: 80%;
   `,
 };
