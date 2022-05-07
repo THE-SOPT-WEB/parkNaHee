@@ -135,5 +135,5 @@ button {
 @font-face {
   font-family: 'JejuMyeongjo';
   font-weight: 400;
-  src: url('../public/fonts/JejuMyeongjo.ttf') format('truetype');
+  src: url('/fonts/JejuMyeongjo.ttf') format('truetype');
 }

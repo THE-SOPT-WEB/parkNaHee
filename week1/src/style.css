@@ -48,7 +48,7 @@
   width: 100%;
   height: 100%;
 }
-.sidebar__options > button :active {
+.sidebar__options > button:focus {
   background-color: rgb(255, 124, 124);
   color: white;
 }
@@ -133,7 +133,8 @@
   position: sticky;
   top: 1rem;
   border-radius: 0.5rem;
-  height: 16rem;
+  min-height: 16rem;
+  height: fit-content;
   background-color: rgb(255, 173, 173);
   padding: 0.75rem 1rem;
   margin: 0 1rem 0 1rem;
@@ -162,6 +163,14 @@
   font-size: 1.5rem;
   margin-bottom: 0.75rem;
 }
+.cart__item {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.cart__item input {
+  width: 20%;
+}
 .cart__footer {
   height: 30%;
   display: flex;
@@ -180,6 +189,29 @@
   color: white;
   background-color: rgb(255, 124, 124);
   cursor: pointer;
+}
+
+.modal {
+  position: fixed;
+  left: 3%;
+  width: 100vw;
+  height: 100vh;
+}
+.modal__content {
+  width: 40%;
+  height: 30%;
+  background: aliceblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+}
+.modal__content h1 {
+  margin-bottom: 1rem;
+}
+.hide {
+  display: none;
 }
 
 @media (max-width: 1200px) {
