@@ -26,8 +26,9 @@ function Main({ setFinalWinner }: MainProps) {
       case 'SECONDROUND':
         setCurrentRound('FINALROUND');
         return 'FINALROUND';
-      default:
-        setFinalWinner(Array.from(winner.current)[0]);
+      case 'FINALROUND':
+        Array.from(winner.current)[0] !== undefined &&
+          setFinalWinner(Array.from(winner.current)[0]);
         navigate('/complete');
     }
   };
@@ -36,7 +37,7 @@ function Main({ setFinalWinner }: MainProps) {
     if (e.target instanceof Element) {
       console.log(courses[e.currentTarget.id]);
       winner.current.add(courses[e.currentTarget.id]);
-      setCurrentStep((prev) => prev + 1);
+      setCurrentStep((prev) => prev + 2);
 
       if (winner.current.size * 2 === ROUND[currentRound]) {
         getNextRound(currentRound);
@@ -54,7 +55,7 @@ function Main({ setFinalWinner }: MainProps) {
       <Tounament
         onClick={onClickHandler}
         currentBattler={currentBattlers}
-        currentStep={currentStep * 2}
+        currentStep={currentStep}
       />
     </>
   );

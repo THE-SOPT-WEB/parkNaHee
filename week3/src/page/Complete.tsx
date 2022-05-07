@@ -19,7 +19,7 @@ function Complete({ finalWinner }: CompleteProps) {
     <Styled.Main>
       <Title>킹받는 과목 월드컵 최종 결과!</Title>
       <p>
-        MAX King은 .. <b>{finalWinner?.alt}</b>입니다-_-{' '}
+        MAX King은 .. <b>{finalWinner?.alt}</b>입니다-_-
       </p>
       <Styled.TounamentFigure>
         <img src={finalWinner?.image} alt={finalWinner?.alt} />
@@ -42,11 +42,13 @@ const Styled = {
     }
   `,
   TounamentFigure: styled.figure`
+    ${flexColumnCenter}
     margin-bottom: 5rem;
     width: 80%;
-    & * {
-      width: 100%;
-      height: 100%;
+    & img {
+      width: 80%;
+      height: auto;
+      max-height: 60vh;
     }
     & figcaption {
       margin-top: 1rem;

@@ -8,7 +8,7 @@ interface TournamentProgressProps {
 function TournamentProgress({ currentRound, currentStep }: TournamentProgressProps) {
   return (
     <Styled.Root>
-      {ROUND[currentRound]}강 {currentStep + 1}라운드
+      {ROUND[currentRound]}강 {currentStep / 2 + 1}라운드
     </Styled.Root>
   );
 }

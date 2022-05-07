@@ -9,6 +9,7 @@ interface TournamentProps {
   currentStep: number;
 }
 function Tounament({ currentBattler, currentStep, onClick }: TournamentProps) {
+  console.log(currentStep);
   return (
     <>
       <Styled.TounamentWrapper>
@@ -16,7 +17,7 @@ function Tounament({ currentBattler, currentStep, onClick }: TournamentProps) {
           <img src={currentBattler[currentStep].image} alt={currentBattler[currentStep].alt} />
           <figcaption>{currentBattler[currentStep].alt}</figcaption>
         </Styled.TounamentFigure>
-        <Styled.TounamentFigure onClick={onClick} id={currentBattler[currentStep].id}>
+        <Styled.TounamentFigure onClick={onClick} id={currentBattler[currentStep + 1].id}>
           <img
             src={currentBattler[currentStep + 1].image}
             alt={currentBattler[currentStep + 1].alt}
