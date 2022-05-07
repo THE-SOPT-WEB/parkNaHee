@@ -9,7 +9,6 @@ interface TournamentProps {
   currentStep: number;
 }
 function Tounament({ currentBattler, currentStep, onClick }: TournamentProps) {
-  console.log(currentStep);
   return (
     <>
       <Styled.TounamentWrapper>

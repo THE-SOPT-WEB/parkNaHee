@@ -35,7 +35,6 @@ function Main({ setFinalWinner }: MainProps) {
 
   const onClickHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (e.target instanceof Element) {
-      console.log(courses[e.currentTarget.id]);
       winner.current.add(courses[e.currentTarget.id]);
       setCurrentStep((prev) => prev + 2);
 
