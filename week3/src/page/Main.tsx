@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import courses from '../models/gameData';
 import Tounament from '../components/main/Tounament';
 import Title from '../components/common/Title';
@@ -8,10 +8,8 @@ import { useNavigate } from 'react-router-dom';
 import TournamentProgress from '../components/main/TournamentProgress';
 
 type CurrentRoundType = 'FIRSTROUND' | 'SECONDROUND' | 'FINALROUND';
-interface MainProps {
-  setFinalWinner?: React.Dispatch<React.SetStateAction<ImageType>>;
-}
-function Main({ setFinalWinner }: MainProps) {
+
+function Main() {
   const winner = useRef(new Set<ImageType>([]));
   const [currentRound, setCurrentRound] = useState<CurrentRoundType>('FIRSTROUND');
   const [currentBattlers, setCurrentBattlers] = useState(Object.values(courses));
@@ -27,23 +25,20 @@ function Main({ setFinalWinner }: MainProps) {
         setCurrentRound('FINALROUND');
         return 'FINALROUND';
       case 'FINALROUND':
-        Array.from(winner.current)[0] !== undefined &&
-          setFinalWinner(Array.from(winner.current)[0]);
-        navigate('/complete');
+        navigate('/complete', { state: Array.from(winner.current)[0] });
     }
   };
 
   const onClickHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    if (e.target instanceof Element) {
-      winner.current.add(courses[e.currentTarget.id]);
-      setCurrentStep((prev) => prev + 2);
+    if (!(e.target instanceof Element)) return;
+    winner.current.add(courses[e.currentTarget.id]);
+    setCurrentStep((prev) => prev + 2);
 
-      if (winner.current.size * 2 === ROUND[currentRound]) {
-        getNextRound(currentRound);
-        setCurrentBattlers(Array.from(winner.current));
-        winner.current = new Set([]);
-        setCurrentStep(0);
-      }
+    if (winner.current.size * 2 === ROUND[currentRound]) {
+      getNextRound(currentRound);
+      setCurrentBattlers(Array.from(winner.current));
+      winner.current = new Set([]);
+      setCurrentStep(0);
     }
   };
 

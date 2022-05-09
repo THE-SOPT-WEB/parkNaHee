@@ -5,16 +5,16 @@ import styled from 'styled-components';
 import { flexColumnCenter } from '../common/mixin';
 import Button from '../components/common/Button';
 import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router';
 
-interface CompleteProps {
-  finalWinner?: ImageType;
-}
-
-function Complete({ finalWinner }: CompleteProps) {
+function Complete() {
   const navigate = useNavigate();
+  const { state } = useLocation();
+  const finalWinner = state as ImageType;
   const onClickHandler = () => {
     navigate('/');
   };
+
   return (
     <Styled.Main>
       <Title>킹받는 과목 월드컵 최종 결과!</Title>
