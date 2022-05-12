@@ -16,6 +16,7 @@
         "corejs": 3,
         "regenerator": true
       }
-    ]
+    ],
+    ["babel-plugin-styled-components"]
   ]
 }

@@ -1,5 +1,7 @@
-import { AllAddressListResponse, AllLocationListResponce, LocationApi } from '@api/LocationApi';
+import { AllLocationListResponce, LocationApi } from '@api/LocationApi';
+import Title from '@components/common/Title';
 import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 
 function Main() {
   const [data, getData] = useState<AllLocationListResponce | undefined>();
@@ -13,7 +15,18 @@ function Main() {
     fetchData();
   }, []);
 
-  return <div>메인 페이지</div>;
+  return (
+    <Styled.Root>
+      <Title>Looking for a beer place</Title>
+    </Styled.Root>
+  );
 }
 
 export default Main;
+const Styled = {
+  Root: styled.div`
+    & h1 {
+      margin-top: 1rem;
+    }
+  `,
+};

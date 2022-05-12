@@ -26,6 +26,7 @@
       "@types": ["src/types/index.ts"],
       "@components/*": ["src/components/*"],
       "@constants/*": ["src/constants/*"],
+      "@styles": ["src/common/styles/index.ts"],
       "@api/*": ["src/common/api/*"],
       "@hooks/*": ["src/hooks/*"],
       "@models/*": ["src/models/*"],

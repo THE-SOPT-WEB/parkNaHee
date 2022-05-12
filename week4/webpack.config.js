@@ -30,6 +30,7 @@ module.exports = {
       '@constants': path.resolve(__dirname, 'src/constants'),
       '@hooks': path.resolve(__dirname, 'src/hooks'),
       '@api': path.resolve(__dirname, 'src/common/api'),
+      '@styles': path.resolve(__dirname, 'src/common/styles/index.ts'),
       '@models': path.resolve(__dirname, 'src/models'),
       '@layouts': path.resolve(__dirname, 'src/layouts'),
       '@utils': path.resolve(__dirname, 'src/common/utils'),
