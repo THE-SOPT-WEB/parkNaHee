@@ -12,3 +12,5 @@ dist/
 # VScode local history
 .history/
 .github/
+
+.env

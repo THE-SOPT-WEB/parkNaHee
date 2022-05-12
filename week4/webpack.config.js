@@ -4,6 +4,11 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const argv = require('yargs').argv;
 
+const dotenv = require('dotenv');
+const webpack = require('webpack');
+
+dotenv.config();
+
 const mode = argv.mode;
 
 module.exports = {
@@ -72,6 +77,9 @@ module.exports = {
     historyApiFallback: true,
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify(process.env),
+    }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
       templateParameters: {
