@@ -37,11 +37,9 @@ const Styled = {
     color: ${({ theme }) => theme.colors['gray-0']};
   `,
   SubmitButton: styled.button`
-    border: 0;
     width: 22px;
     height: 22px;
     margin: 0.5rem 0.75rem;
-    cursor: pointer;
     background: url('https://firebasestorage.googleapis.com/v0/b/wesopt29-2e38a.appspot.com/o/SearchIcon.svg?alt=media');
   `,
 };

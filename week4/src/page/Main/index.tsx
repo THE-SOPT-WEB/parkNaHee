@@ -5,12 +5,16 @@ import {
   getAddressByCoordinteProps,
   getLocationByKeywordProps,
 } from '@api/LocationApi';
-import SearchBar from '@components/common/SearchBar';
+import SearchBar from '@components/main/SearchBar';
 import Title from '@components/common/Title';
 import useLatestState from '@hooks/useLatestState';
 import { flexColumnCenter } from '@mixin';
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+import CardList from '@components/main/CardList';
+import AsyncBoundary from '@components/common/AsyncBoundary';
+import ErrorFallback from '@components/common/ErrorFallback';
+import Loading from '@components/common/Skeleton';
 
 function Main() {
   const [keywordLocationData, setKeywordLocationData] = useState<
@@ -45,6 +49,7 @@ function Main() {
   };
 
   const fetchSearchResult = async ({ query, page, size, x, y }: getLocationByKeywordProps) => {
+    console.log('x,y 제대로 들어왔니', x, y);
     const currentData = await LocationApi.getLocationByKeyword({ query, page, size, x, y });
     console.log('>currentData', currentData);
     setKeywordLocationData(currentData);
@@ -66,6 +71,7 @@ function Main() {
     switch (isCheckboxInput) {
       case true:
         setSearchValue('');
+        setKeywordLocationData(undefined);
         break;
       default:
         const currentLocation = (await getLocation()) as getAddressByCoordinteProps;
@@ -87,24 +93,31 @@ function Main() {
   };
 
   return (
-    <Styled.Root>
-      <Title>Looking for a beer place</Title>
-      <Styled.CheckboxInput>
-        <label htmlFor="isCheckboxInput">현재 위치로 검색할래요</label>
-        <input
-          type="checkbox"
-          name="isCheckboxInput"
-          checked={isCheckboxInput}
-          onClick={handleClick}
+    <AsyncBoundary
+      pendingFallback={<Loading />}
+      renderRejectedFallback={({ error, reset }) => <ErrorFallback error={error} reset={reset} />}
+    >
+      <Styled.Root>
+        <Title>Looking for a beer place</Title>
+        <Styled.CheckboxInput>
+          <label htmlFor="isCheckboxInput">현재 위치로 검색할래요</label>
+          <input
+            type="checkbox"
+            name="isCheckboxInput"
+            checked={isCheckboxInput}
+            onClick={handleClick}
+          />
+        </Styled.CheckboxInput>
+        <SearchBar
+          placeholder="동네를 검색하세요."
+          value={searchValue}
+          onChange={handleChange}
+          onSubmit={getAddressDataByKeyword}
+          readOnly={isCheckboxInput}
         />
-      </Styled.CheckboxInput>
-      <SearchBar
-        placeholder="동네를 검색하세요."
-        value={searchValue}
-        onChange={handleChange}
-        onSubmit={getAddressDataByKeyword}
-      />
-    </Styled.Root>
+        <CardList keywordLocationData={keywordLocationData} />
+      </Styled.Root>
+    </AsyncBoundary>
   );
 }
 

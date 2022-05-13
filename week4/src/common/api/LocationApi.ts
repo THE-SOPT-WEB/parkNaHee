@@ -5,7 +5,7 @@ const HEADER = {
   Authorization: process.env.AUTHORIZATION_TOKEN as string,
 };
 
-interface LocationType {
+export interface LocationType {
   address_name: string;
   category_group_code: string;
   category_group_name: string;
@@ -86,12 +86,12 @@ export class LocationApi extends AbstractApi {
     query,
     page,
     size,
-    radius,
+    radius = 1000,
     x,
     y,
   }: getLocationByKeywordProps): Promise<AllLocationListResponce> {
     let URL;
-    if (x && y && radius) {
+    if (x && y) {
       URL =
         BASE_URL +
         this.buildPath('search', 'keyword') +
@@ -100,7 +100,7 @@ export class LocationApi extends AbstractApi {
       URL =
         BASE_URL +
         this.buildPath('search', 'keyword') +
-        this.buildQuery({ query: `${query} 맥주`, page, size });
+        this.buildQuery({ query: `${query} 맥주`, page, size, radius });
     }
     const response = await axios.get<AllLocationListResponce>(URL, {
       headers: HEADER,

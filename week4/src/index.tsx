@@ -44,11 +44,19 @@ const GlobalStyle = createGlobalStyle`
     content: '';
     content: none;
   }
+  a{
+    text-decoration: none;
+    color:#DBDBDB;
+
+  }
   table {
     border-collapse: collapse;
     border-spacing: 0;
   }
-  html, body{
+  html{
+    height:100%;
+  }
+  body{
     width:100%;
     height:100%;
     background: #2F2F2F;
@@ -61,15 +69,21 @@ const GlobalStyle = createGlobalStyle`
       outline: none;
     }
   }
+  button{
+    cursor: pointer;
+    border: 0;
+  }
   #root{
     width: 40%;
     min-width: 414px;
     height: 100%;
+    padding-bottom: 1rem;
     display: flex;
     justify-content: center;
-    background-color: #363636;
+    /* background-color: #363636; */
     @media(max-width:414px){
       width:100%;
+      min-width: 100%;
     }
   }
 `;

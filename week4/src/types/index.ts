@@ -5,6 +5,7 @@ export interface DefaultTheme {
     'gray-2': string;
     'gray-3': string;
     'gray-4': string;
+    'gray-5': string;
     yellow: string;
   };
   border: string;
