@@ -1,9 +1,9 @@
 import React, { InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
 
-interface SearchBarProps extends InputHTMLAttributes<HTMLInputElement> {
+interface SearchBarProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onSubmit'> {
   className?: string;
-  onSubmit?: () => {};
+  onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
   [key: string]: any;
 }
 function SearchBar({ onSubmit, ...props }: SearchBarProps) {

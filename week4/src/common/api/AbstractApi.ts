@@ -5,8 +5,8 @@ interface QueryType {
 }
 
 interface metaType {
-  is_end: boolean;
-  pageable_count: number;
+  is_end?: boolean;
+  pageable_count?: number;
   same_name?: {
     keyword?: string;
     region?: string[];

@@ -31,10 +31,12 @@ module.exports = {
       '@hooks': path.resolve(__dirname, 'src/hooks'),
       '@api': path.resolve(__dirname, 'src/common/api'),
       '@styles': path.resolve(__dirname, 'src/common/styles/index.ts'),
+      '@mixin': path.resolve(__dirname, 'src/common/mixin/index.ts'),
       '@models': path.resolve(__dirname, 'src/models'),
       '@layouts': path.resolve(__dirname, 'src/layouts'),
       '@utils': path.resolve(__dirname, 'src/common/utils'),
       '@page': path.resolve(__dirname, 'src/page'),
+      '@assets': path.resolve(__dirname, 'src/assets'),
     },
   },
   module: {
@@ -64,6 +66,34 @@ module.exports = {
       {
         test: /\.(png|jpe?g|gif|otf|ttf)$/,
         type: 'asset/resource',
+      },
+      {
+        // write image files under 10k to inline or copy image files over 10k
+        test: /\.(jpg|jpeg|gif|png|svg|ico)?$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+              fallback: 'file-loader',
+              name: '@assets/[name].[ext]',
+            },
+          },
+        ],
+      },
+      {
+        // write files under 10k to inline or copy files over 10k
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+              fallback: 'file-loader',
+              name: 'fonts/[name].[ext]',
+            },
+          },
+        ],
       },
     ],
   },

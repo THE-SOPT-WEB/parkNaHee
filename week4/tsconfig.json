@@ -27,15 +27,17 @@
       "@components/*": ["src/components/*"],
       "@constants/*": ["src/constants/*"],
       "@styles": ["src/common/styles/index.ts"],
+      "@mixin": ["src/common/mixin/index.ts"],
       "@api/*": ["src/common/api/*"],
       "@hooks/*": ["src/hooks/*"],
       "@models/*": ["src/models/*"],
       "@layouts/*": ["src/layouts/*"],
       "@utils/*": ["src/common/utils/*"],
-      "@page/*": ["src/page/*"]
+      "@page/*": ["src/page/*"],
+      "@assets/*": ["src/assets/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "@types/index.d.ts"],
   "exclude": [
     ".git",
     ".npm",
@@ -45,5 +47,6 @@
     "node_modules",
     "**/dist/*",
     "**/node_modules/*"
-  ]
+  ],
+  "typeRoots": ["./@types", "./node_modules/@types"]
 }

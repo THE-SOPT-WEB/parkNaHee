@@ -56,6 +56,11 @@ const GlobalStyle = createGlobalStyle`
     justify-content: center;
     align-items: center;
   }
+  input{
+    &:focus {
+      outline: none;
+    }
+  }
   #root{
     width: 40%;
     min-width: 414px;
