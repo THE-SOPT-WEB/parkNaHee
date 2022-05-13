@@ -1,11 +1,11 @@
-import { AllLocationListResponce } from '@api/LocationApi';
+import { AllLocationListDataType, AllLocationListResponce } from '@api/LocationApi';
 import React from 'react';
 import CardList from './CardList';
 import NoResult from './NoResult';
 
 interface ResultProps {
   isEmpty: boolean;
-  keywordLocationData: AllLocationListResponce | undefined;
+  keywordLocationData: AllLocationListDataType | undefined;
 }
 function Result({ isEmpty, keywordLocationData }: ResultProps) {
   switch (isEmpty) {

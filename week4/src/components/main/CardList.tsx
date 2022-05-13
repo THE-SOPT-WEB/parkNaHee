@@ -1,11 +1,11 @@
-import { AllLocationListResponce } from '@api/LocationApi';
+import { AllLocationListDataType, AllLocationListResponce } from '@api/LocationApi';
 import Card from '@components/common/Card';
 import { flexColumnCenter } from '@mixin';
 import React from 'react';
 import styled from 'styled-components';
 
 interface CardListProps {
-  keywordLocationData: AllLocationListResponce | undefined;
+  keywordLocationData: AllLocationListDataType | undefined;
 }
 
 function CardList({ keywordLocationData }: CardListProps) {

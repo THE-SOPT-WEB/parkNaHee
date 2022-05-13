@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { AbstractApi, CommonResponse } from './AbstractApi';
+import { AbstractApi, CommonResponse, metaType } from './AbstractApi';
 const BASE_URL = 'https://dapi.kakao.com/v2/local';
 const HEADER = {
   Authorization: process.env.AUTHORIZATION_TOKEN as string,
@@ -55,14 +55,28 @@ interface CurrentLocationType {
   x: number;
   y: number;
 }
+export interface AllLocationListDataType {
+  meta?: metaType;
+  documents: LocationType[];
+}
+
+export interface AllAddressListDataType {
+  meta?: metaType;
+  documents: AddressAllType[];
+}
+
+export interface CurrentLocationDataType {
+  meta?: metaType;
+  documents: CurrentLocationType[];
+}
 export interface AllLocationListResponce extends CommonResponse {
-  documents?: LocationType[];
+  data: AllLocationListDataType;
 }
 export interface AllAddressListResponse extends CommonResponse {
-  documents?: AddressAllType[];
+  data: AllAddressListDataType;
 }
 export interface CurrentLocationResponse extends CommonResponse {
-  documents?: CurrentLocationType[];
+  data: CurrentLocationDataType;
 }
 
 export interface getAddressByKeywordProps {
@@ -102,10 +116,10 @@ export class LocationApi extends AbstractApi {
         this.buildPath('search', 'keyword') +
         this.buildQuery({ query: `${query} 맥주`, page, size, radius });
     }
-    const response = await axios.get<AllLocationListResponce>(URL, {
+    const response = await axios.get(URL, {
       headers: HEADER,
     });
-    return response.data;
+    return response as AllLocationListResponce;
   }
 
   public static async getAddressByKeyword({
@@ -115,8 +129,8 @@ export class LocationApi extends AbstractApi {
   }: getAddressByKeywordProps): Promise<AllAddressListResponse> {
     const URL =
       BASE_URL + this.buildPath('search', 'address') + this.buildQuery({ query, page, size });
-    const response = await axios.get<AllAddressListResponse>(URL, { headers: HEADER });
-    return response.data;
+    const response = await axios.get(URL, { headers: HEADER });
+    return response as AllAddressListResponse;
   }
 
   public static async getAddressByCoordinte({
@@ -124,7 +138,7 @@ export class LocationApi extends AbstractApi {
     y,
   }: getAddressByCoordinteProps): Promise<CurrentLocationResponse> {
     const URL = BASE_URL + this.buildPath('geo', 'coord2regioncode') + this.buildQuery({ x, y });
-    const response = await axios.get<CurrentLocationResponse>(URL, { headers: HEADER });
-    return response.data;
+    const response = await axios.get(URL, { headers: HEADER });
+    return response as CurrentLocationResponse;
   }
 }

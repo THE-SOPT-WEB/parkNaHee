@@ -6,7 +6,6 @@ interface CardProps {
   locationData: LocationType | undefined;
 }
 function Card({ locationData }: CardProps) {
-  console.log('locationData<locationData', locationData);
   return (
     <Styled.LI>
       <Styled.Title>

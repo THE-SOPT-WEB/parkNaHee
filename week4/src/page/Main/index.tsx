@@ -1,25 +1,21 @@
 import {
-  AllLocationListResponce,
-  getAddressByKeywordProps,
   LocationApi,
   getAddressByCoordinteProps,
   getLocationByKeywordProps,
+  AllLocationListDataType,
 } from '@api/LocationApi';
 import SearchBar from '@components/main/SearchBar';
 import Title from '@components/common/Title';
-import useLatestState from '@hooks/useLatestState';
 import { flexColumnCenter } from '@mixin';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import CardList from '@components/main/CardList';
-import AsyncBoundary from '@components/common/AsyncBoundary';
 import ErrorFallback from '@components/common/ErrorFallback';
 import Loading from '@components/common/Skeleton';
 import Result from '@components/main/Result';
 
 function Main() {
   const [keywordLocationData, setKeywordLocationData] = useState<
-    AllLocationListResponce | undefined
+    AllLocationListDataType | undefined
   >();
   const [isCheckboxInput, setIsCheckboxInput] = useState(false);
   const [searchValue, setSearchValue] = useState('');
@@ -54,17 +50,16 @@ function Main() {
     console.log('x,y 제대로 들어왔니', x, y);
     const currentData = await LocationApi.getLocationByKeyword({ query, page, size, x, y });
     console.log('>currentData', currentData);
-    setKeywordLocationData(currentData);
+    setKeywordLocationData(currentData?.data);
   };
 
   const fetchCurrentLocation = async ({ x, y }: getAddressByCoordinteProps) => {
     const currentLocation = await LocationApi.getAddressByCoordinte({ x, y });
     console.log('>currentLocation', currentLocation);
-    currentLocation?.documents && setSearchValue(currentLocation?.documents[0]?.address_name);
+    currentLocation?.data && setSearchValue(currentLocation.data.documents[0]?.address_name);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
     setSearchValue(e.target.value);
   };
 
@@ -78,19 +73,22 @@ function Main() {
       default:
         const currentLocation = (await getLocation()) as getAddressByCoordinteProps;
         await fetchCurrentLocation(currentLocation);
-        fetchSearchResult({
+        await fetchSearchResult({
           query: `${searchValue}`,
           page: 1,
           size: 15,
           x: currentLocation?.x,
           y: currentLocation?.y,
         });
-        console.log(currentLocation);
     }
   };
 
   const getAddressDataByKeyword = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (searchValue === '') {
+      alert('검색어를 입력해주세요');
+      return;
+    }
     fetchSearchResult({ query: `${searchValue}`, page: 1, size: 15 });
   };
 
@@ -106,31 +104,27 @@ function Main() {
   }, [keywordLocationData]);
 
   return (
-    <AsyncBoundary
-      pendingFallback={<Loading />}
-      renderRejectedFallback={({ error, reset }) => <ErrorFallback error={error} reset={reset} />}
-    >
-      <Styled.Root>
-        <Title>Looking for a beer place</Title>
-        <Styled.CheckboxInput>
-          <label htmlFor="isCheckboxInput">현재 위치로 검색할래요</label>
-          <input
-            type="checkbox"
-            name="isCheckboxInput"
-            checked={isCheckboxInput}
-            onClick={handleClick}
-          />
-        </Styled.CheckboxInput>
-        <SearchBar
-          placeholder="동네를 검색하세요."
-          value={searchValue}
-          onChange={handleChange}
-          onSubmit={getAddressDataByKeyword}
-          readOnly={isCheckboxInput}
+    <Styled.Root>
+      <Title>Looking for a beer place</Title>
+      <Styled.CheckboxInput>
+        <label htmlFor="isCheckboxInput">현재 위치로 검색할래요</label>
+        <input
+          type="checkbox"
+          name="isCheckboxInput"
+          checked={isCheckboxInput}
+          onClick={handleClick}
         />
-        <Result keywordLocationData={keywordLocationData} isEmpty={isEmpty} />
-      </Styled.Root>
-    </AsyncBoundary>
+      </Styled.CheckboxInput>
+      <SearchBar
+        placeholder="동네를 검색하세요."
+        type="text"
+        value={searchValue}
+        onChange={handleChange}
+        onSubmit={getAddressDataByKeyword}
+        readOnly={isCheckboxInput}
+      />
+      <Result keywordLocationData={keywordLocationData} isEmpty={isEmpty} />
+    </Styled.Root>
   );
 }
 

@@ -1,10 +1,12 @@
+import { AnyStyledComponent } from 'styled-components';
+
 type PossibleQueryType = number | string;
 
 interface QueryType {
   [key: string]: PossibleQueryType;
 }
 
-interface metaType {
+export interface metaType {
   is_end?: boolean;
   pageable_count?: number;
   same_name?: {
@@ -15,7 +17,7 @@ interface metaType {
   total_count: number;
 }
 export interface CommonResponse {
-  meta: metaType;
+  status?: number;
 }
 
 export abstract class AbstractApi {
