@@ -95,7 +95,7 @@ export class LocationApi extends AbstractApi {
       URL =
         BASE_URL +
         this.buildPath('search', 'keyword') +
-        this.buildQuery({ query: `${query} 맥주`, page, size, x, y, radius });
+        this.buildQuery({ query: '맥주', page, size, x, y, radius });
     } else {
       URL =
         BASE_URL +
