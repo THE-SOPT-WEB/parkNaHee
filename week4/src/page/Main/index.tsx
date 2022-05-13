@@ -15,6 +15,7 @@ import CardList from '@components/main/CardList';
 import AsyncBoundary from '@components/common/AsyncBoundary';
 import ErrorFallback from '@components/common/ErrorFallback';
 import Loading from '@components/common/Skeleton';
+import Result from '@components/main/Result';
 
 function Main() {
   const [keywordLocationData, setKeywordLocationData] = useState<
@@ -22,6 +23,7 @@ function Main() {
   >();
   const [isCheckboxInput, setIsCheckboxInput] = useState(false);
   const [searchValue, setSearchValue] = useState('');
+  const [isEmpty, setIsEmpty] = useState(false);
 
   const getLocation = () => {
     // 클로저를 이용해 한 번 위치를 받아온 이후엔 불필요한 요청 보내지 않도록
@@ -92,6 +94,17 @@ function Main() {
     fetchSearchResult({ query: `${searchValue}`, page: 1, size: 15 });
   };
 
+  useEffect(() => {
+    switch (keywordLocationData?.documents?.length === 0) {
+      case true:
+        setIsEmpty(true);
+        break;
+      default:
+        setIsEmpty(false);
+        break;
+    }
+  }, [keywordLocationData]);
+
   return (
     <AsyncBoundary
       pendingFallback={<Loading />}
@@ -115,7 +128,7 @@ function Main() {
           onSubmit={getAddressDataByKeyword}
           readOnly={isCheckboxInput}
         />
-        <CardList keywordLocationData={keywordLocationData} />
+        <Result keywordLocationData={keywordLocationData} isEmpty={isEmpty} />
       </Styled.Root>
     </AsyncBoundary>
   );
