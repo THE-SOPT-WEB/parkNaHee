@@ -1,12 +1,15 @@
 import React from 'react';
-interface ErrorFallbackProps {
-  error: Nullable<Error>;
-  reset: () => void;
-}
+import styled from 'styled-components';
 
-function ErrorFallback({ error, reset }: ErrorFallbackProps) {
-  console.log('>>>', error, reset);
-  return <div>ErrorFallback</div>;
+function ErrorFallback() {
+  return <Styled.Root>에러로 데이터를 불러올 수 없습니다ㅠ</Styled.Root>;
 }
 
 export default ErrorFallback;
+const Styled = {
+  Root: styled.section`
+    color: ${({ theme }) => theme.colors['gray-0']};
+    font-size: 1rem;
+    margin-top: 10rem;
+  `,
+};

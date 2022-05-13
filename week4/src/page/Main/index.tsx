@@ -9,9 +9,9 @@ import Title from '@components/common/Title';
 import { flexColumnCenter } from '@mixin';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import ErrorFallback from '@components/common/ErrorFallback';
-import Loading from '@components/common/Skeleton';
 import Result from '@components/main/Result';
+import { flushSync } from 'react-dom';
+export type StatusType = 'IDLE' | 'LOADING' | 'ERROR' | 'COMPLETE';
 
 function Main() {
   const [keywordLocationData, setKeywordLocationData] = useState<
@@ -20,9 +20,27 @@ function Main() {
   const [isCheckboxInput, setIsCheckboxInput] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const [isEmpty, setIsEmpty] = useState(false);
+  const [status, setStatus] = useState<StatusType>('IDLE');
+
+  const changeStatus = (currentStatus: StatusType) => {
+    switch (currentStatus) {
+      case 'IDLE':
+        flushSync(() => setStatus('IDLE'));
+        break;
+      case 'LOADING':
+        flushSync(() => setStatus('LOADING'));
+        break;
+      case 'ERROR':
+        flushSync(() => setStatus('ERROR'));
+        break;
+      default:
+        flushSync(() => setStatus('COMPLETE'));
+        break;
+    }
+  };
 
   const getLocation = () => {
-    // 클로저를 이용해 한 번 위치를 받아온 이후엔 불필요한 요청 보내지 않도록
+    // 클로저를 이용해 한 번 위치를 받아온 이후엔 리렌더하기 이전까지 새로 불러오지 않도록
     let _x, _y;
     if ('geolocation' in navigator && !_x && !_y) {
       return new Promise((resolve) => {
@@ -38,6 +56,7 @@ function Main() {
           (e) => {
             alert('현재 위치를 불러올 수 없습니다.');
             setIsCheckboxInput(false);
+            changeStatus('ERROR');
           },
         );
       });
@@ -47,16 +66,21 @@ function Main() {
   };
 
   const fetchSearchResult = async ({ query, page, size, x, y }: getLocationByKeywordProps) => {
-    console.log('x,y 제대로 들어왔니', x, y);
-    const currentData = await LocationApi.getLocationByKeyword({ query, page, size, x, y });
-    console.log('>currentData', currentData);
-    setKeywordLocationData(currentData?.data);
+    try {
+      const currentData = await LocationApi.getLocationByKeyword({ query, page, size, x, y });
+      setKeywordLocationData(currentData?.data);
+    } catch (e) {
+      changeStatus('ERROR');
+    }
   };
 
   const fetchCurrentLocation = async ({ x, y }: getAddressByCoordinteProps) => {
-    const currentLocation = await LocationApi.getAddressByCoordinte({ x, y });
-    console.log('>currentLocation', currentLocation);
-    currentLocation?.data && setSearchValue(currentLocation.data.documents[0]?.address_name);
+    try {
+      const currentLocation = await LocationApi.getAddressByCoordinte({ x, y });
+      currentLocation?.data && setSearchValue(currentLocation.data.documents[0]?.address_name);
+    } catch (e) {
+      changeStatus('ERROR');
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,11 +88,13 @@ function Main() {
   };
 
   const handleClick = async () => {
+    changeStatus('LOADING');
     setIsCheckboxInput((prev) => !prev);
     switch (isCheckboxInput) {
       case true:
         setSearchValue('');
         setKeywordLocationData(undefined);
+        changeStatus('IDLE');
         break;
       default:
         const currentLocation = (await getLocation()) as getAddressByCoordinteProps;
@@ -80,6 +106,7 @@ function Main() {
           x: currentLocation?.x,
           y: currentLocation?.y,
         });
+        changeStatus('COMPLETE');
     }
   };
 
@@ -89,7 +116,9 @@ function Main() {
       alert('검색어를 입력해주세요');
       return;
     }
+    changeStatus('LOADING');
     fetchSearchResult({ query: `${searchValue}`, page: 1, size: 15 });
+    changeStatus('COMPLETE');
   };
 
   useEffect(() => {
@@ -113,6 +142,7 @@ function Main() {
           name="isCheckboxInput"
           checked={isCheckboxInput}
           onClick={handleClick}
+          readOnly
         />
       </Styled.CheckboxInput>
       <SearchBar
@@ -123,7 +153,7 @@ function Main() {
         onSubmit={getAddressDataByKeyword}
         readOnly={isCheckboxInput}
       />
-      <Result keywordLocationData={keywordLocationData} isEmpty={isEmpty} />
+      <Result keywordLocationData={keywordLocationData} isEmpty={isEmpty} status={status} />
     </Styled.Root>
   );
 }

@@ -32,7 +32,6 @@ export abstract class AbstractApi {
   }
 
   protected static buildPath(...args: string[]): string {
-    console.log('>>args', args);
     return args.reduce((path, arg) => {
       return `${path}/${arg}`;
     }, '');
